@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="stylesheet" href="assets/main.css"/>
+    <link rel="import" href="polymer_components/service-tag.html"/>
+    <script defer>
+      const spawn = require('child_process').spawn;
+
+      window.addEventListener('DOMContentLoaded', initialize);
+
+      function initialize () {
+        checkAll();
+      }
+
+      function checkAll () {
+        console.debug('checking all...');
+        checkEmma27();
+        checkAudience();
+        checkRedis();
+      }
+
+      function checkEmma27 () {
+        const element = document.getElementById('emma27ServiceTag');
+        element.status = '...';
+        element.state = 'unknown';
+        const child = spawn('ssh', ['emma27', 'echo', 'howdy']);
+        child.on('close', (code) => {
+          element.status = code ? 'OFF' : 'ON';
+          element.state = code ? 'bad' : 'good';
+        });
+      }
+
+      function checkAudience () {
+        const element = document.getElementById('audienceServiceTag');
+        element.status = '...';
+        element.state = 'unknown';
+        const child = spawn('ssh', ['audience', 'echo', 'howdy']);
+        child.on('close', (code) => {
+          element.status = code ? 'OFF' : 'ON';
+          element.state = code ? 'bad' : 'good';
+        });
+      }
+
+      function checkRedis () {
+        const element = document.getElementById('redisServiceTag');
+        element.status = '...';
+        element.state = 'unknown';
+        const child = spawn('redis-cli', ['TIME']);
+        child.on('close', (code) => {
+          element.status = code ? 'OFF' : 'ON';
+          element.state = code ? 'bad' : 'good';
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <img id="logo" src="assets/emma-engineering-logo.png"/>
+    <service-tag id="emma27ServiceTag" label="emma27"></service-tag>
+    <service-tag id="audienceServiceTag" label="audience"></service-tag>
+    <service-tag id="redisServiceTag" label="redis"></service-tag>
+    <hr/>
+    <button onclick="checkAll()">refresh</button>
+  </body>
+</html>

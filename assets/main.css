@@ -1,0 +1,10 @@
+body {
+    font-family: ubuntu, helvetica, arial, sans-serif;
+    background: #697072;
+}
+
+#logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 50%;
+}

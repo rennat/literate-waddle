@@ -1,0 +1,52 @@
+<link rel="import"
+      href="../bower_components/polymer/polymer.html">
+
+<dom-module id="service-tag">
+
+  <template>
+      <div>
+          <span class="Status" data-state$="{{state}}">{{status}}</span><span class="Label">{{label}}</span>
+      </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: "service-tag",
+      properties: {
+        label: {
+          type: String,
+          value: "A Service"
+        },
+        state: {
+            type: String,
+            value: "unknown"
+        },
+        status: {
+            type: String,
+            value: "..."
+        }
+      }
+    });
+  </script>
+
+    <style>
+        .Status {
+            display: inline-block;
+            margin: 0 1ex;
+            padding: 2px 4px;
+            width: 4em;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            border-radius: 3px;
+            color: white;
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+            background-color: #231f20;
+        }
+        .Status[data-state="unknown"] { color: goldenrod; }
+        .Status[data-state="good"] { color: green; }
+        .Status[data-state="bad"] { color: red; }
+    </style>
+
+</dom-module>

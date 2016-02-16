@@ -1,0 +1,21 @@
+{
+  "name": "literate-waddle",
+  "description": "",
+  "main": "main.js",
+  "authors": [
+    "Tanner Netterville <tannern@gmail.com>"
+  ],
+  "license": "GPL V3",
+  "homepage": "https://github.com/rennat/literate-waddle",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0"
+  }
+}
